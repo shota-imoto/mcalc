@@ -19,5 +19,4 @@ class RetirementAssetCalc
   def yield_including_tax
     annual_yield.to_r * 0.01r * tax_rate.to_r * 0.01r
   end
-
 end
