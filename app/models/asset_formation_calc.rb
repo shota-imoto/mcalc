@@ -2,7 +2,7 @@ class AssetFormationCalc
   attr_accessor :asset_sum, :asset_config
 
   def initialize(config)
-    @asset_sum ||= 0
+    @asset_sum ||= config.initial_asset
     @asset_config = config
   end
 
