@@ -1,3 +1,6 @@
+# annual_yield: 期待年利
+# monthly_purchase: 月々の購入額
+
 class AssetConfig
   attr_accessor :monthly_purchase, :annual_yield, :monthly_yield
 
@@ -9,7 +12,7 @@ class AssetConfig
   end
 
   def self.test_case
-    self.new(monthly_purchase: 1, annual_yield: 5)
+    self.new(monthly_purchase: 15, annual_yield: 5)
   end
 
   private
