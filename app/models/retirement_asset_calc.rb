@@ -1,3 +1,5 @@
+# monthly_living_cost: (万円/月)
+
 class RetirementAssetCalc
   attr_accessor :monthly_living_cost, :annual_yield, :tax_rate, :retirement_asset
 
@@ -6,6 +8,10 @@ class RetirementAssetCalc
     @monthly_living_cost = params[:monthly_living_cost].to_f
     @annual_yield = params[:annual_yield].to_f || 0
     @tax_rate = (params[:tax_rate] || 80).to_f
+  end
+
+  def self.test_case
+    new(monthly_living_cost: 10, annual_yield: 5)
   end
 
   def calculate!
