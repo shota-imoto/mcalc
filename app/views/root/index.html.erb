@@ -1,1 +1,13 @@
-<%= link_to '積立額の算出', asset_formation_calc_index_path %>
+<div>
+  <div>メニュー</div>
+  <div>
+    <% if  AssetConfig.exists?(AssetConfig.count) %>
+      <%= link_to '設定', edit_asset_config_path(@asset_config) %>
+    <% else %>
+      <%= link_to '設定', new_asset_config_path %>
+    <% end %>
+  </div>
+  <div>
+    <%= link_to '積立額の算出', asset_formation_calc_index_path %>
+  </div>
+</div>
