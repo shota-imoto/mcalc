@@ -9,10 +9,6 @@ class AssetConfig < ApplicationRecord
     monthly_yield = monthly_yield_calc
   end
 
-  def after_initialize
-
-  end
-
   def self.test_case
     self.new(monthly_purchase: 15, annual_yield: 5, initial_asset: 100)
   end

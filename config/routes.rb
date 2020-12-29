@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   end
 
   resources :asset_config, only: [:new, :create, :edit, :update]
+  resources :retirement_asset_calc, only: [:new, :create, :edit, :update]
 end
