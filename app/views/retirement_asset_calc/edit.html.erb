@@ -1,0 +1,28 @@
+<div>
+  <h1>リタイア必要額計算 設定フォーム</h1>
+</div>
+<div>
+  <%= form_with model: @retirement_asset_calc, method: :patch, local: :true do |f|%>
+    <div>
+      月々の生活費(万円)
+    </div>
+    <div>
+      <%= f.number_field :monthly_living_cost %>
+    </div>
+    <div>
+      税引き後割合(%)
+    </div>
+    <div>
+      <%= f.number_field :tax_rate, value: 80 %>
+    </div>
+    <div>
+      期待年利(%)
+    </div>
+    <div>
+      <%= f.number_field :annual_yield, value: 5 %>
+    </div>
+    <div>
+      <%= f.submit "設定する" %>
+    </div>
+  <% end %>
+</div>
