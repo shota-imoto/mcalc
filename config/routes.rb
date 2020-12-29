@@ -6,4 +6,6 @@ Rails.application.routes.draw do
       post 'calculate'
     end
   end
+
+  resources :asset_config, only: [:new, :create, :edit, :update]
 end

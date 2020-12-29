@@ -12,4 +12,10 @@
 
 ActiveRecord::Schema.define(version: 0) do
 
+  create_table "asset_configs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "initial_asset", default: "0"
+    t.string "monthly_purchase", default: "0"
+    t.string "annual_yield", default: "0"
+  end
+
 end
