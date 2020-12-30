@@ -3,8 +3,6 @@
 class RetirementAssetCalc < ApplicationRecord
   before_save :calculate!
 
-  attr_accessor :retirement_asset
-
   def self.test_case
     new(monthly_living_cost: 10, annual_yield: 5)
   end
