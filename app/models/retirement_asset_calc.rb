@@ -1,10 +1,15 @@
 # monthly_living_cost: (万円/月)
 
 class RetirementAssetCalc < ApplicationRecord
-  before_save :calculate!
+  attr_accessor :yield_config, :retirement_asset
+  # after_find :calculate!
+
+  def load_yield_config(yield_config)
+    @yield_config = yield_config
+  end
 
   def self.test_case
-    new(monthly_living_cost: 10, annual_yield: 5)
+    new(monthly_living_cost: 10)
   end
 
   def calculate!
@@ -16,6 +21,6 @@ class RetirementAssetCalc < ApplicationRecord
   end
 
   def yield_including_tax
-    annual_yield.to_r * 0.01r * tax_rate.to_r * 0.01r
+    yield_config.annual_yield.to_r * 0.01r * tax_rate.to_r * 0.01r
   end
 end

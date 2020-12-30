@@ -15,14 +15,11 @@ ActiveRecord::Schema.define(version: 0) do
   create_table "asset_configs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "initial_asset", default: "0"
     t.string "monthly_purchase", default: "0"
-    t.string "annual_yield", default: "0"
   end
 
   create_table "retirement_asset_calcs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "monthly_living_cost", default: "0"
-    t.string "annual_yield", default: "0"
     t.string "tax_rate", default: "80"
-    t.string "retirement_asset", default: "0"
   end
 
   create_table "yield_configs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
