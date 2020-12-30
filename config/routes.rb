@@ -9,4 +9,5 @@ Rails.application.routes.draw do
 
   resources :asset_config, only: [:new, :create, :edit, :update]
   resources :retirement_asset_calc, only: [:new, :create, :edit, :update]
+  resources :yield_config, only: [:new, :create, :edit, :update]
 end

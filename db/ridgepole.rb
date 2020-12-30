@@ -13,3 +13,8 @@ create_table "retirement_asset_calcs", force: :cascade do |t|
   t.string "tax_rate", null: :false, default: 80
   t.string "retirement_asset", null: :false, default: 0
 end
+
+
+create_table "yield_configs", force: :cascade do |t|
+  t.string "annual_yield", null: :false, default: 5
+end
