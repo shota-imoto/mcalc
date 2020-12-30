@@ -25,4 +25,8 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "retirement_asset", default: "0"
   end
 
+  create_table "yield_configs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "annual_yield", default: "5"
+  end
+
 end

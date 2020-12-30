@@ -7,11 +7,18 @@
       <%= link_to '設定', new_asset_config_path %>
     <% end %>
   </div>
-    <div>
+  <div>
     <% if  RetirementAssetCalc.exists?(RetirementAssetCalc.count) %>
-      <%= link_to 'リタイア額計算用の設定', edit_retirement_asset_calc_path(@asset_config) %>
+      <%= link_to 'リタイア額計算用の設定', edit_retirement_asset_calc_path(@retirement_asset_calc) %>
     <% else %>
       <%= link_to 'リタイア額計算用の設定', new_retirement_asset_calc_path %>
+    <% end %>
+  </div>
+  <div>
+    <% if YieldConfig.exists?(YieldConfig.count) %>
+      <%= link_to '期待利率の設定', edit_yield_config_path(@yield_config) %>
+    <% else %>
+      <%= link_to '期待利率の設定', new_yield_config_path %>
     <% end %>
   </div>
   <div>
