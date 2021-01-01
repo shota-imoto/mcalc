@@ -1,4 +1,6 @@
 class YieldConfig < ApplicationRecord
+  belongs_to :user
+
   attr_accessor :monthly_yield
   after_find :set_monthly_yield
 

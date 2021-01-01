@@ -1,6 +1,8 @@
 # monthly_living_cost: (万円/月)
 
 class RetirementAssetCalc < ApplicationRecord
+  belongs_to :user
+
   attr_accessor :yield_config, :retirement_asset
   # after_find :calculate!
 
