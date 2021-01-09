@@ -1,21 +1,21 @@
 <div>
   <div>メニュー</div>
   <div>
-    <% if  AssetConfig.exists?(AssetConfig.count) %>
+    <% if @asset_config.present? %>
       <%= link_to '設定', edit_asset_config_path(@asset_config) %>
     <% else %>
       <%= link_to '設定', new_asset_config_path %>
     <% end %>
   </div>
   <div>
-    <% if  RetirementAssetCalc.exists?(RetirementAssetCalc.count) %>
+    <% if @retirement_asset_calc.present? %>
       <%= link_to 'リタイア額計算用の設定', edit_retirement_asset_calc_path(@retirement_asset_calc) %>
     <% else %>
       <%= link_to 'リタイア額計算用の設定', new_retirement_asset_calc_path %>
     <% end %>
   </div>
   <div>
-    <% if YieldConfig.exists?(YieldConfig.count) %>
+    <% if @yield_config.present? %>
       <%= link_to '期待利率の設定', edit_yield_config_path(@yield_config) %>
     <% else %>
       <%= link_to '期待利率の設定', new_yield_config_path %>
@@ -25,7 +25,11 @@
     <%= link_to '積立額の算出', asset_formation_calc_index_path %>
   </div>
   <div>
-    リタイアまで<%= @rest_time_calc.asset_years%>年
+    <% if @rest_time_calc %>
+      リタイアまで<%= @rest_time_calc.asset_years%>年
+    <% else %>
+      設定が不十分な箇所があります。
+    <% end %>
   </div>
 
 
