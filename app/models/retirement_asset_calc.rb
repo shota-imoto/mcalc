@@ -2,13 +2,10 @@
 
 class RetirementAssetCalc < ApplicationRecord
   belongs_to :user
+  has_one :yield_config, through: :user
 
-  attr_accessor :yield_config, :retirement_asset
-  # after_find :calculate!
-
-  def load_yield_config(yield_config)
-    @yield_config = yield_config
-  end
+  attr_accessor :retirement_asset
+  after_find :calculate!
 
   def self.test_case
     new(monthly_living_cost: 10)
@@ -19,7 +16,7 @@ class RetirementAssetCalc < ApplicationRecord
   end
 
   def annual_living_cost
-    monthly_living_cost * 12r
+    monthly_living_cost.to_r * 12r
   end
 
   def yield_including_tax
