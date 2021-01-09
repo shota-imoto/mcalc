@@ -12,7 +12,7 @@ class RetirementAssetCalc < ApplicationRecord
   end
 
   def calculate!
-    self.retirement_asset = (annual_living_cost.to_r / yield_including_tax).to_f
+    self.retirement_asset = (annual_living_cost.to_r / yield_including_tax).to_f if yield_config
   end
 
   def annual_living_cost

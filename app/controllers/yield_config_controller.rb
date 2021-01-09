@@ -28,6 +28,6 @@ class YieldConfigController < ApplicationController
   private
 
   def yield_config_params
-    params.require(:yield_config).permit!
+    params.require(:yield_config).permit!.merge(user: current_user)
   end
 end
