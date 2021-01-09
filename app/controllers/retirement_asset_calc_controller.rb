@@ -28,6 +28,6 @@ class RetirementAssetCalcController < ApplicationController
   private
 
   def retirement_asset_calc_params
-    params.require(:retirement_asset_calc).permit!
+    params.require(:retirement_asset_calc).permit!.merge(user: current_user)
   end
 end

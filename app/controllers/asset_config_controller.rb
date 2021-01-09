@@ -4,7 +4,6 @@ class AssetConfigController < ApplicationController
   end
 
   def create
-    binding.pry
     @asset_config = AssetConfig.new(asset_config_params)
     if @asset_config.save
       redirect_to root_path
@@ -29,6 +28,6 @@ class AssetConfigController < ApplicationController
   private
 
   def asset_config_params
-    params.require(:asset_config).permit!.merge(user_id: current_user.id)
+    params.require(:asset_config).permit!.merge(user: current_user)
   end
 end
