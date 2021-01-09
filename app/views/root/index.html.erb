@@ -25,7 +25,11 @@
     <%= link_to '積立額の算出', asset_formation_calc_index_path %>
   </div>
   <div>
-    リタイアまで<%= @rest_time_calc.asset_years%>年
+    <% if @rest_time_calc %>
+      リタイアまで<%= @rest_time_calc.asset_years%>年
+    <% else %>
+      設定が不十分な箇所があります。
+    <% end %>
   </div>
 
 
