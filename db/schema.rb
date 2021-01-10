@@ -15,11 +15,13 @@ ActiveRecord::Schema.define(version: 0) do
   create_table "asset_configs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "initial_asset", default: "0"
     t.string "monthly_purchase", default: "0"
+    t.string "user_id"
   end
 
   create_table "retirement_asset_calcs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "monthly_living_cost", default: "0"
     t.string "tax_rate", default: "80"
+    t.string "user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -28,12 +30,17 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "yield_configs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "annual_yield", default: "5"
+    t.string "user_id"
   end
 
 end
