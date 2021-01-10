@@ -1,4 +1,6 @@
 class RootController < ApplicationController
+  # before_action :user_confirmed?
+
   def index
     if user_signed_in?
       builder = RestTimeCalcBuilder.new(current_user)
