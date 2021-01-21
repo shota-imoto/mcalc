@@ -1,7 +1,8 @@
 class RestTimeCalc
-  attr_accessor :asset_formation, :asset_years, :asset_month, :retirement_asset
+  attr_accessor :asset_formation, :asset_years, :asset_month, :retirement_asset, :user_id
 
-  def initialize(asset_formation, retirement_asset_calc)
+  def initialize(asset_formation, retirement_asset_calc, user_id)
+    @user_id = user_id
     @asset_formation = asset_formation
     @retirement_asset = retirement_asset_calc
     @asset_years = 0
@@ -22,5 +23,9 @@ class RestTimeCalc
 
   def year_calc_test(years)
     asset_formation.asset_after_years(years)
+  end
+
+  def user
+    User.find(user_id)
   end
 end
