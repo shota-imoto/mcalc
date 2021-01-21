@@ -11,4 +11,11 @@ Rails.application.routes.draw do
   resources :asset_config, only: [:new, :create, :edit, :update]
   resources :retirement_asset_calc, only: [:new, :create, :edit, :update]
   resources :yield_config, only: [:new, :create, :edit, :update]
+
+  # api
+  namespace :api do
+    namespace :v1 do
+      root 'root#index'
+    end
+  end
 end
