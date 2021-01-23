@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable
 
+  validates :nickname, presence: true
+
   has_one :asset_config
   has_one :yield_config
   has_one :retirement_asset_calc
