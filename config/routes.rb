@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       root 'root#index'
-      devise_for :users, controllers: { registrations: 'api/v1/users/registrations', confirmations: 'api/v1/users/confirmations' }
+      devise_for :users, controllers: { registrations: 'api/v1/users/registrations', confirmations: 'api/v1/users/confirmations', sessions: 'api/v1/users/sessions' }
     end
   end
 end
