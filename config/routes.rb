@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: 'users/registrations', confirmations: 'users/confirmations' }
+  devise_for :users, controllers: { registrations: 'users/registrations', confirmations: 'users/confirmations', sessions: 'users/sessions' }
   root 'root#index'
 
   resources :asset_formation_calc do
