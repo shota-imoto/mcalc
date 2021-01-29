@@ -1,21 +1,26 @@
 class Api::V1::Users::SessionsController < Devise::SessionsController
+
   protect_from_forgery :except => [:create, :failed]
 
   def create
-    self.resource = warden.authenticate!(auth_options)
-    set_flash_message!(:notice, :signed_in)
-    sign_in(resource_name, resource)
+    user = User.find_by(email: user_params[:email])
+    redirect_to :failed unless user
 
-    binding.pry
+    if user.authenticate(user_params[:password])
+      jwt_token = issue(user.id)
+      response.headers['X-Authentication-Token'] = jwt_token
 
-    session_response = SessionResponse.new(status: 'success', message: "signed in as #{resource.nickname}", user_id: resource.id)
-    serializer = SessionResponseSerializer.new(session_response)
-    render json: serializer.serializable_hash.to_json
+      session_response = SessionResponse.new(status: 'success', message: "signed in as #{user.nickname}", user_id: user.id)
+      serializer = SessionResponseSerializer.new(session_response)
+      render json: serializer.serializable_hash.to_json
+    else
+      redirect_to :failed
+    end
   end
 
   def failed
-    binding.pry
-    session_response = SessionResponse.new(status: 'error', message: flash[:alert])
+    message = 'メールアドレスまたはパスワードが間違っています'
+    session_response = SessionResponse.new(status: 'error', message: messages)
     serializer = SessionResponseSerializer.new(session_response)
     render json: serializer.serializable_hash.to_json
   end
@@ -26,6 +31,10 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
     # 失敗時に recall に設定したパスのアクションが呼び出されるので変更
     # { scope: resource_name, recall: "#{controller_path}#new" } # デフォルト
     { scope: :user, recall: "#{controller_path}#failed" }
+  end
+
+  def user_params
+    params.require(:user).permit(:email, :password)
   end
 end
 

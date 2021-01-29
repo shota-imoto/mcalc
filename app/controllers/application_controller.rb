@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+  include JwtAuthentication
+
+
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def user_confirmed?
