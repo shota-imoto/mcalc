@@ -3,10 +3,10 @@ class Api::V1::RootController < ApplicationController
 
   def index
     jwt_token = issue(17)
-
+    binding.pry
     if jwt_token
       payload = decode(jwt_token)
-      user = User.find(payload[0]["user_id"])
+      user = User.find(payload[0]["sub"])
       builder = RestTimeCalcBuilder.new(user)
       @rest_time_calc = builder.rest_time_calc
       serializer = RestTimeCalcSerializer.new(@rest_time_calc, serializer_options)

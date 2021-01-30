@@ -8,7 +8,7 @@ module JwtAuthentication
     rsa_private_str = Rails.application.credentials.jwt[:private].gsub("\\n", "\n")
     rsa_private = OpenSSL::PKey::RSA.new(rsa_private_str)
     expires_in = 1.month.from_now
-    payload = {user_id: user_id, exp: expires_in.to_i}
+    payload = {sub: user_id, iat: expires_in.to_i}
     token = JWT.encode(payload, rsa_private, 'RS256')
   end
 
