@@ -11,7 +11,6 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 
       session_response = SessionResponse.new(status: 'success', message: "signed in as #{user.nickname}", user_id: user.id)
       serializer = SessionResponseSerializer.new(session_response)
-
       render json: serializer.serializable_hash.to_json
     else
       message = 'メールアドレスまたはパスワードが間違っています'

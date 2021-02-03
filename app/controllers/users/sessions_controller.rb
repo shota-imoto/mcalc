@@ -29,7 +29,7 @@ class Users::SessionsController < Devise::SessionsController
   end
 
     protected
-  def auth_options
+  # def auth_options
     # 失敗時に recall に設定したパスのアクションが呼び出されるので変更
 
   # DELETE /resource/sign_out
