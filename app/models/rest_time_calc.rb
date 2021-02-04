@@ -1,7 +1,7 @@
 class RestTimeCalc
   attr_accessor :asset_formation, :asset_years, :asset_month, :retirement_asset, :user_id
 
-  def initialize(asset_formation, retirement_asset_calc, user_id)
+  def initialize(asset_formation = nil, retirement_asset_calc = nil, user_id = nil)
     @user_id = user_id
     @asset_formation = asset_formation
     @retirement_asset = retirement_asset_calc
@@ -14,7 +14,7 @@ class RestTimeCalc
   end
 
   def year_calc
-    retirement_asset.calculate!
+    retirement_asset.calculate
     loop.with_index do |_, i|
       break self.asset_years = i + 1 if asset_formation.asset_after_one_year > retirement_asset.retirement_asset
     end
