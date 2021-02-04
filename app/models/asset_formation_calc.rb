@@ -1,10 +1,10 @@
 class AssetFormationCalc
-  attr_accessor :asset_sum, :asset_config, :yield_config
+  attr_accessor :asset_sum, :asset_config
 
-  def initialize(asset_config, yield_config)
-    @asset_sum ||= asset_config.initial_asset
+  def initialize(asset_config)
+    @asset_sum ||= asset_config&.initial_asset
     @asset_config = asset_config
-    @yield_config = yield_config
+    @count = 0
   end
 
   def self.test_case
@@ -32,7 +32,7 @@ class AssetFormationCalc
   def asset_after_one_month
     self.asset_sum = asset_sum.to_f
     self.asset_sum += asset_config.monthly_purchase.to_i
-    self.asset_sum *= yield_config.monthly_yield.to_f
+    self.asset_sum *= asset_config.monthly_yield.to_f
   end
 end
 
