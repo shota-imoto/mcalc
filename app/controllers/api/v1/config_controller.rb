@@ -2,7 +2,6 @@ class Api::V1::ConfigController < ApplicationController
   before_action :authenticate
 
   def create
-    binding.pry
     if @user
       asset_config = AssetConfig.find_by_user_or_initialize(asset_config_params)
       if asset_config.save
