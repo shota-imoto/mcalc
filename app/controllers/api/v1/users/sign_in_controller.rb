@@ -2,6 +2,7 @@ class Api::V1::Users::SignInController < ApplicationController
   protect_from_forgery :except => [:create]
 
   def create
+    binding.pry
     user = User.find_by(email: user_params[:email])
 
     if user&.authenticate(user_params[:password])
