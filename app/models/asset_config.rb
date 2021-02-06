@@ -5,7 +5,7 @@ class AssetConfig < ApplicationRecord
   belongs_to :user
   has_one :yield_config, through: :user
 
-  validates :initial_asset, :monthly_purchase, presence: true
+  validates :initial_asset, :monthly_purchase, :annual_yield, presence: true
 
   def self.test_case
     self.new(monthly_purchase: 15, initial_asset: 100)
