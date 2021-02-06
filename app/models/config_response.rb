@@ -1,4 +1,4 @@
-class RetirementAssetConfigResponse
+class ConfigResponse
   attr_accessor :status, :message, :user_id
 
   def initialize(params)

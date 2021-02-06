@@ -13,7 +13,7 @@ class Api::V1::ConfigController < ApplicationController
       serializer = ConfigResponseSerializer.new(config_response)
       render json: serializer.serializable_hash.to_json
     else
-      message = '認証情報がありません'
+      message = {'認証エラー': '認証情報がありません'}
       config_response = ConfigResponse.new(status: 'error', message: message)
       serializer = ConfigResponseSerializer.new(config_response)
       render json: serializer.serializable_hash.to_json

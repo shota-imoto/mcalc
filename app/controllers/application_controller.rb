@@ -12,10 +12,10 @@ class ApplicationController < ActionController::Base
 
   def authenticate
     jwt_token = request.authorization&.remove("Token ", "")
-    return unless jwt_token
-
-    payload = decode(jwt_token)
-    @user = User.find(payload[0]["sub"])
+    if jwt_token.present?
+      payload = decode(jwt_token)
+      @user = User.find(payload[0]["sub"])
+    end
   end
 
   protected
