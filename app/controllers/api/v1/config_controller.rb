@@ -1,6 +1,12 @@
 class Api::V1::ConfigController < ApplicationController
   before_action :authenticate
 
+  def new
+    asset_config = AssetConfig.find_or_initialize_by(user_id: @user.id)
+    serializer = AssetConfigSerializer.new(asset_config)
+    render json: serializer.serializable_hash.to_json
+  end
+
   def create
     if @user
       asset_config = AssetConfig.find_by_user_or_initialize(asset_config_params)
