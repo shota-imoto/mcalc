@@ -7,10 +7,6 @@ class AssetFormationCalc
     @count = 0
   end
 
-  def self.test_case
-    new(AssetConfig.test_case)
-  end
-
   def calculate(years_later)
     asset_after_years(years_later).asset_sum_round!
   end
