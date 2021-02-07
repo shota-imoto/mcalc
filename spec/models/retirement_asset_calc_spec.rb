@@ -1,11 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe RetirementAssetCalc, type: :model do
-
   describe 'calculate!' do
-    let(:user) { create(:user) }
-    let(:asset_config) { create(:asset_config, user: user) }
-    let!(:retirement_asset_calc) { create(:retirement_asset_calc, user: user) }
+    include_context :user_with_rest_time_calc_config
     subject { (retirement_asset_calc.retirement_asset * retirement_asset_calc.annual_yield.to_r / 100 * retirement_asset_calc.tax_rate.to_r / 100 / 12).to_i }
 
     context '必要な設定値が与えられている場合' do
