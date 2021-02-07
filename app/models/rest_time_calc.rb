@@ -1,16 +1,19 @@
 class RestTimeCalc
-  attr_accessor :asset_formation, :asset_years, :asset_month, :retirement_asset, :user_id
+  include ActiveModel::Validations
 
-  def initialize(asset_formation = nil, retirement_asset_calc = nil, user_id = nil)
+  attr_accessor :asset_formation, :asset_years, :asset_month, :retirement_asset, :user_id, :asset_config
+  validates :asset_config, :retirement_asset, presence: true
+
+  def initialize(retirement_asset_calc = nil, user_id = nil, asset_config = nil)
     @user_id = user_id
-    @asset_formation = asset_formation
+    @asset_config = asset_config
     @retirement_asset = retirement_asset_calc
     @asset_years = 0
-    year_calc
+    year_calc if valid?
   end
 
-  def self.test_case
-    new(AssetFormationCalc.test_case, RetirementAssetCalc.test_case)
+  def asset_formation
+    @asset_formation ||= asset_formation_calc = AssetFormationCalc.new(asset_config)
   end
 
   def year_calc
@@ -19,10 +22,6 @@ class RestTimeCalc
       break self.asset_years = i + 1 if asset_formation.asset_after_one_year > retirement_asset.retirement_asset
     end
     self
-  end
-
-  def year_calc_test(years)
-    asset_formation.asset_after_years(years)
   end
 
   def user

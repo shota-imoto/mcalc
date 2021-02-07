@@ -7,10 +7,6 @@ class AssetConfig < ApplicationRecord
 
   validates :initial_asset, :monthly_purchase, :annual_yield, presence: true
 
-  def self.test_case
-    self.new(monthly_purchase: 15, initial_asset: 100)
-  end
-
   def monthly_yield
     @monthly_yield ||= monthly_yield_calc
   end
