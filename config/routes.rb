@@ -17,8 +17,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       root 'root#index'
       devise_for :users, controllers: { registrations: 'api/v1/users/registrations', confirmations: 'api/v1/users/confirmations', sessions: 'api/v1/users/sessions' }
-      resources :config, only: :create
-      resources :retirement_asset_config, only: :create
+      resources :config, only: [:new, :create]
+      resources :retirement_asset_config, only: [:new, :create]
       namespace :users do
         resources :sign_up, only: :create
         resources :sign_in, only: :create

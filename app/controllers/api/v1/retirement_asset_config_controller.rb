@@ -1,6 +1,12 @@
 class Api::V1::RetirementAssetConfigController < ApplicationController
   before_action :authenticate
 
+  def new
+    retirement_asset_calc = RetirementAssetCalc.find_or_initialize_by(user_id: @user.id)
+    serializer = RetirementAssetCalcSerializer.new(retirement_asset_calc)
+    render json: serializer.serializable_hash.to_json
+  end
+
   def create
     if @user
       asset_config = RetirementAssetCalc.find_by_user_or_initialize(retirement_asset_calc_params)
