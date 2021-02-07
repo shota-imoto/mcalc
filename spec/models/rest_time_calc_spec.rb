@@ -2,9 +2,7 @@ require 'rails_helper'
 
 RSpec.describe RestTimeCalc, type: :model do
   describe 'year_calc' do
-    let(:user) { create(:user) }
-    let(:retirement_asset_calc) { create(:retirement_asset_calc, user: user) }
-    let(:asset_config) { create(:asset_config, user: user) }
+    include_context :user_with_rest_time_calc_config
     let(:asset_formation_calc) { AssetFormationCalc.new(asset_config) }
     let(:rest_time_calc) { RestTimeCalc.new(asset_formation_calc, retirement_asset_calc, user.id) }
     let(:result) { rest_time_calc.asset_years }
