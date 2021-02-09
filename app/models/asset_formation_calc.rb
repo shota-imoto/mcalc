@@ -7,8 +7,13 @@ class AssetFormationCalc
     @count = 0
   end
 
-  def calculate(years_later)
-    asset_after_years(years_later).asset_sum_round!
+  def reset!
+    @asset_sum = asset_config&.initial_asset
+  end
+
+  def calculate(years_later = 0, month_later = 0)
+    asset_after_years(years_later)
+    asset_after_months(month_later)
   end
 
   def asset_sum_round!
@@ -22,6 +27,11 @@ class AssetFormationCalc
 
   def asset_after_one_year
     12.times { asset_after_one_month }
+    asset_sum
+  end
+
+  def asset_after_months(month_later)
+    month_later.times { asset_after_one_month }
     asset_sum
   end
 
