@@ -4,31 +4,27 @@ class AssetFormationCalc
   def initialize(asset_config)
     @asset_sum ||= asset_config&.initial_asset
     @asset_config = asset_config
-    @count = 0
   end
 
-  def calculate(years_later)
-    asset_after_years(years_later).asset_sum_round!
-  end
-
-  def asset_sum_round!
+  def calculate!(years_later = 0, month_later = 0)
+    months = years_later * 12 + month_later
+    self.asset_sum = asset_after_months(months)
     self.asset_sum = asset_sum.round
   end
 
-  def asset_after_years(year_later)
-    year_later.times { asset_after_one_year }
-    self
-  end
-
-  def asset_after_one_year
-    12.times { asset_after_one_month }
-    asset_sum
+  def asset_after_months(month_later)
+    sum = asset_sum.to_f
+    month_later.times do |i|
+      sum += asset_config.monthly_purchase.to_i # asset_after_one_monthを用いた場合、このメソッドを非破壊的に書くことができなくなるためDRY化していない
+      sum *= asset_config.monthly_yield.to_f
+    end
+    sum
   end
 
   def asset_after_one_month
-    self.asset_sum = asset_sum.to_f
-    self.asset_sum += asset_config.monthly_purchase.to_i
-    self.asset_sum *= asset_config.monthly_yield.to_f
+    sum = asset_sum.to_f
+    sum += asset_config.monthly_purchase.to_i
+    sum *= asset_config.monthly_yield.to_f
   end
 end
 

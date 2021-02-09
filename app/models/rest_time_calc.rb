@@ -1,30 +1,34 @@
 class RestTimeCalc
   include ActiveModel::Validations
 
-  attr_accessor :asset_formation, :asset_years, :asset_month, :retirement_asset, :user_id, :asset_config
+  attr_accessor :asset_config, :retirement_asset, :user_id, :asset_years, :asset_months
   validates :asset_config, :retirement_asset, presence: true
 
   def initialize(retirement_asset_calc = nil, user_id = nil, asset_config = nil)
-    @user_id = user_id
-    @asset_config = asset_config
-    @retirement_asset = retirement_asset_calc
-    @asset_years = 0
-    year_calc if valid?
+    @user_id, @asset_config, @retirement_asset = user_id, asset_config, retirement_asset_calc
+    @asset_years, @asset_months = 0, 0
+    calculate! if valid?
   end
 
   def asset_formation
     @asset_formation ||= asset_formation_calc = AssetFormationCalc.new(asset_config)
   end
 
-  def year_calc
-    retirement_asset.calculate
+  def calculate!
     loop.with_index do |_, i|
-      break self.asset_years = i + 1 if asset_formation.asset_after_one_year > retirement_asset.retirement_asset
+      if asset_formation.asset_after_one_month > retirement_asset.retirement_asset
+        self.asset_years, self.asset_months = to_years_and_months(i + 1)
+        break
+      end
+      asset_formation.asset_sum = asset_formation.asset_after_one_month
     end
-    self
+  end
+
+  def to_years_and_months(months)
+    [months / 12, months % 12]
   end
 
   def user
-    User.find(user_id)
+    @user ||= User.find(user_id)
   end
 end
