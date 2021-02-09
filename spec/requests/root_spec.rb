@@ -16,7 +16,7 @@ RSpec.describe "Root", :type => :request do
         expect(JSON.parse(response.body).dig("data", "type")).to eq "rest_time_calc"
       end
 
-      it 'レスポンスにエラーメッセージが含まれている' do
+      it 'レスポンスにエラーメッセージが含まれていない' do
         expect(messages.present?).to be_falsey
       end
     end
