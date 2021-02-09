@@ -1,6 +1,0 @@
-<p>Welcome <%= @email %>!</p>
-
-<p>仮登録が完了しました。</p>
-<p>「本登録する」をクリックして登録を完了させてください。</p>
-
-<p><%= link_to '本登録する', user_confirmation_url(@resource, confirmation_token: @token) %></p>
