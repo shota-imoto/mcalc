@@ -4,7 +4,6 @@ class AssetFormationCalc
   def initialize(asset_config)
     @asset_sum ||= asset_config&.initial_asset
     @asset_config = asset_config
-    @count = 0
   end
 
   def reset!
@@ -14,6 +13,7 @@ class AssetFormationCalc
   def calculate(years_later = 0, month_later = 0)
     asset_after_years(years_later)
     asset_after_months(month_later)
+    asset_sum_round!
   end
 
   def asset_sum_round!
