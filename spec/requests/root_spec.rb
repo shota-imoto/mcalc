@@ -10,10 +10,15 @@ RSpec.describe "Root", :type => :request do
     before { get api_v1_root_path, headers: headers }
 
     context "正常系" do
-      let(:messages) { JSON.parse(response.body).dig("data", "attributes").delete("messages") }
+      let(:attributes) { JSON.parse(response.body).dig("data", "attributes") }
+      let(:messages) { attributes.delete("messages") }
 
       it "RestTimeCalcクラスのオブジェクトがシリアライズされて返される" do
         expect(JSON.parse(response.body).dig("data", "type")).to eq "rest_time_calc"
+      end
+
+      it "RestTimeCalcオブジェクトはasset_years, asset_months, messagesの3項目を返す" do
+        expect(attributes.keys).to eq ["asset_years", "asset_months", "messages"]
       end
 
       it 'レスポンスにエラーメッセージが含まれていない' do
