@@ -5,7 +5,7 @@ class AssetConfig < ApplicationRecord
   belongs_to :user
   has_one :yield_config, through: :user
 
-  validates :initial_asset, :monthly_purchase, :annual_yield, presence: true
+  validates :initial_asset, :monthly_purchase, :annual_yield, presence: true, numericality: { greater_than: 0 }
 
   def monthly_yield
     @monthly_yield ||= monthly_yield_calc
