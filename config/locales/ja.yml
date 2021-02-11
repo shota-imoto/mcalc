@@ -1,0 +1,42 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+    attributes:
+      user:
+        nickname: ニックネーム
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード(確認用)
+      asset_config:
+        initial_asset: 現在の資産
+        monthly_purchase: 月々の積立額
+        annual_yield: 期待年利
+      retirement_asset_calc:
+        monthly_living_cost: 月々の生活費
+        tax_rate: 税引き後レート
+        annual_yield: 期待年利
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              invalid: "%{attribute}ではない値が入力されています"
+            password:
+              invalid: "%{attribute}は数字、半角小文字、半角大文字を1文字ずつ以上含む必要があります"
+        retirement_asset_calc:
+          attributes:
+            tax_rate:
+              greater_than: "%{attribute}は%{count}%より大きい値にしてください"
+              less_than_or_equal_to: "%{attribute}は%{count}%以下にしてください"
+  errors:
+    format: "%{message}"
+    messages:
+      blank: "%{attribute}を入力してください"
+      taken: "すでに使用されている%{attribute}です"
+      confirmation: "%{attribute}が一致しません"
+      too_short: "%{attribute}は%{count}文字以上にしてください"
+      too_long: "%{attribute}は%{count}文字以下にしてください"
+      greater_than: "%{attribute}は%{count}より大きい値にしてください"
+      not_a_number: "%{attribute}は数字を入力してください"
+      less_than_or_equal_to: "%{attribute}は%{count}以下の値にしてください"

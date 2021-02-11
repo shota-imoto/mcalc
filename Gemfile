@@ -71,4 +71,3 @@ gem 'ridgepole'
 gem 'jsonapi-serializer'
 gem 'jwt'
 gem 'bcrypt', '~> 3.1.7'
-

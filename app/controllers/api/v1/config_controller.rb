@@ -13,8 +13,7 @@ class Api::V1::ConfigController < ApplicationController
       if asset_config.save
         config_response = Response.new(status: 'success', message: "set configure as #{@user.nickname}", user_id: @user.id)
       else
-        messages = asset_config.errors.messages
-        config_response = Response.new(status: 'error', message: messages, user_id: @user.id)
+        config_response = Response.new(status: 'error', message: asset_config.errors.full_messages, user_id: @user.id)
       end
       serializer = ResponseSerializer.new(config_response)
       render json: serializer.serializable_hash.to_json
