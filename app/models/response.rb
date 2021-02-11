@@ -1,4 +1,4 @@
-class RegistrationResponse
+class Response
   attr_accessor :status, :message, :user_id
 
   def initialize(params)
