@@ -6,7 +6,7 @@ class Api::V1::Users::SignUpController < ApplicationController
     if user.save
       registration_response = Response.new(status: 'success', message: 'mail for confirmation has sent', user_id: user.id)
     else
-      registration_response = Response.new(status: 'error', message: user.errors.messages)
+      registration_response = Response.new(status: 'error', message: user.errors.full_messages)
     end
     serializer = ResponseSerializer.new(registration_response)
     render json: serializer.serializable_hash.to_json
