@@ -8,13 +8,13 @@ class Api::V1::Users::SignInController < ApplicationController
       jwt_token = issue(user.id)
       response.headers['X-Authentication-Token'] = jwt_token
 
-      session_response = SessionResponse.new(status: 'success', message: "signed in as #{user.nickname}", user_id: user.id)
-      serializer = SessionResponseSerializer.new(session_response)
+      session_response = Response.new(status: 'success', message: "signed in as #{user.nickname}", user_id: user.id)
+      serializer = ResponseSerializer.new(session_response)
       render json: serializer.serializable_hash.to_json
     else
       message = 'メールアドレスまたはパスワードが間違っています'
-      session_response = SessionResponse.new(status: 'error', message: message)
-      serializer = SessionResponseSerializer.new(session_response)
+      session_response = Response.new(status: 'error', message: message)
+      serializer = ResponseSerializer.new(session_response)
       render json: serializer.serializable_hash.to_json
     end
   end
