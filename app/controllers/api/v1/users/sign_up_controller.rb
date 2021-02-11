@@ -4,6 +4,7 @@ class Api::V1::Users::SignUpController < ApplicationController
   def create
     user = User.new(sign_up_params)
     if user.save
+      UserMailer.confirm_sign_up(user).deliver_now
       registration_response = Response.new(status: 'success', message: 'mail for confirmation has sent', user_id: user.id)
     else
       registration_response = Response.new(status: 'error', message: user.errors.full_messages)
