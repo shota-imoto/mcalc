@@ -67,7 +67,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'ridgepole'
-gem 'devise'
+# gem 'devise'
 gem 'jsonapi-serializer'
 gem 'jwt'
 gem 'bcrypt', '~> 3.1.7'
