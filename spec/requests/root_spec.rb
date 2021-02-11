@@ -3,10 +3,9 @@ require 'rails_helper'
 RSpec.describe "Root", :type => :request do
   describe 'index' do
     include_context :user_with_rest_time_calc_config
+    include_context :authenticated_header_by_user
     require 'json'
-    include JwtAuthentication
-    let(:jwt_token) { issue(user.id)}
-    let(:headers) { { Authorization: jwt_token } }
+
     before { get api_v1_root_path, headers: headers }
 
     context "正常系" do
