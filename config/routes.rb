@@ -10,4 +10,10 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  root 'root#index'
+  namespace :users do
+    resources :sign_up, only: :index
+  end
+
 end
