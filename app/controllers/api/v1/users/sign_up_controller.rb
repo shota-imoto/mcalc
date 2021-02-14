@@ -1,4 +1,5 @@
 class Api::V1::Users::SignUpController < ApplicationController
+  include UserConfirmation
   protect_from_forgery :except => [:create]
 
   def create
@@ -16,6 +17,6 @@ class Api::V1::Users::SignUpController < ApplicationController
   protected
 
   def sign_up_params
-    params.require(:user).permit(:nickname, :email, :password, :password_confirmation)
+    params.require(:user).permit(:nickname, :email, :password, :password_confirmation).merge(confirmation_options)
   end
 end
