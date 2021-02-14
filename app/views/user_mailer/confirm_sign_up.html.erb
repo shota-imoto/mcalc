@@ -1,6 +1,6 @@
-<%= @user.nickname %> さん
+<p><%= @user.nickname %> さん</p>
 
-F.I.R.E Countdown Appのユーザー登録申請ありがとうございます。
-下記のリンクをクリックして、本登録を完了してください。
+<p>F.I.R.E Countdown Appのユーザー登録申請ありがとうございます。</p>
+<p>下記のリンクをクリックして、本登録を完了してください。</p>
 
-<%= link_to "こちら",  users_sign_up_index_url.concat("?user_id=#{@user.id}&confirmation_token=#{@user.confirmation_token}"), params: {confirmationtoken: @user.confirmation_token} %>
+<p><%= link_to "こちら", url_with_confirmation_token(confirm_api_v1_users_sign_up_index_url, @user)%></p>

@@ -3,6 +3,4 @@
 F.I.R.E Countdown Appのユーザー登録申請ありがとうございます。
 下記のリンクをクリックして、本登録を完了してください。
 
-<%= link_to "こちら",  users_sign_up_index_url(@user), confirmation_token: @user.confirmation_token %>
-<%= link_to "こちら",  users_sign_up_index_url(@user), data: {confirmationtoken: @user.confirmation_token} %>
-
+<%= link_to "こちら", url_with_confirmation_token(confirm_api_v1_users_sign_up_index_url, @user)%>

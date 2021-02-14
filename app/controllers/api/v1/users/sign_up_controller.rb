@@ -14,6 +14,16 @@ class Api::V1::Users::SignUpController < ApplicationController
     render json: serializer.serializable_hash.to_json
   end
 
+  def confirm
+    if confirm_token
+      jwt_token = issue(params[:user_id])
+      response.headers['X-Authentication-Token'] = jwt_token
+      redirect_to "firecountdownapp://home"
+    else
+      render plain: "不正なアクセス"
+    end
+  end
+
   protected
 
   def sign_up_params
