@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  require 'securerandom'
   has_secure_password validations: false
 
   validates :nickname, :email, :password, :password_confirmation, presence: true
