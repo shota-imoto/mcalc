@@ -3,7 +3,7 @@ module UserConfirmation
 
   def confirm_token
     user = User.find(params[:user_id])
-    user.confirmation_token == params[:confirmation_token]
+    user.confirmation_token == params[:confirmation_token] && user.confirmation_sent_at + 30.minutes >= Time.zone.now
   end
 
   def confirmation_options
