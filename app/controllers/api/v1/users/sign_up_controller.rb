@@ -1,6 +1,6 @@
 class Api::V1::Users::SignUpController < ApplicationController
-  include UserConfirmation
-  protect_from_forgery :except => [:create]
+  require 'securerandom'
+  include UrlHelper
 
   def create
     user = User.new(sign_up_params)
@@ -15,16 +15,29 @@ class Api::V1::Users::SignUpController < ApplicationController
   end
 
   def confirm
-    if confirm_token
-      redirect_to "firecountdownapp://home"
+    token = params[:confirmation_token]
+    if token
+      user = User.find(params[:user_id])
+      result = user.confirm_token(token)
+      url = app_url_with_params(result)
+      redirect_to url
     else
       render plain: "不正なアクセス"
     end
   end
 
-  protected
+  private
 
   def sign_up_params
     params.require(:user).permit(:nickname, :email, :password, :password_confirmation).merge(confirmation_options)
+  end
+
+  def confirmation_options
+    { confirmation_token: confirmation_token, confirmation_sent_at: Time.zone.now }
+  end
+
+  def confirmation_token(length = 20)
+    rlength = (length * 3) / 4
+    SecureRandom.urlsafe_base64(rlength)
   end
 end
