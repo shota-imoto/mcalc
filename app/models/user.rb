@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include UserConfirmationModule
   require 'securerandom'
   has_secure_password validations: false
 
