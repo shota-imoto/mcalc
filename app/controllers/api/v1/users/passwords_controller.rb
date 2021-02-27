@@ -1,4 +1,4 @@
-class Api::V1::Users::PasswordController < ApplicationController
+class Api::V1::Users::PasswordsController < ApplicationController
   require 'securerandom'
   include UrlHelper
 
@@ -6,7 +6,8 @@ class Api::V1::Users::PasswordController < ApplicationController
     binding.pry
     user = User.find_by(email: params[:user][:email])
     if user
-      user.update(sign_up_params)
+      user.assign_attributes(sign_up_params)
+      user.save validate: false
       UserMailer.reset_password(user).deliver_now
       registration_response = Response.new(status: 'success', message: 'mail for confirmation has sent', user_id: user.id)
     else
@@ -16,23 +17,29 @@ class Api::V1::Users::PasswordController < ApplicationController
     render json: serializer.serializable_hash.to_json
   end
 
-  def confirm
+  def edit
     binding.pry
-    # token = params[:confirmation_token]
-    # if token
-    #   user = User.find(params[:user_id])
-    #   result = user.confirm_token(token)
-    #   url = app_url_with_params(result)
-    #   redirect_to url
-    # else
-    #   render plain: "不正なアクセス"
-    # end
+    if params[:reset_password_token]
+      user = User.find(params[:user_id])
+      url = url_with_params('firecountdownapp://reset_password', reset_password_auth_params)
+      redirect_to url
+    else
+      render plain: "不正なアクセス"
+    end
+  end
+
+  def update
+
   end
 
   private
 
   def sign_up_params
     params.require(:user).permit(:email).merge(confirmation_options)
+  end
+
+  def reset_password_auth_params
+    { user_id: params[:user_id], reset_password_token: params[:reset_password_token] }
   end
 
   def confirmation_options
