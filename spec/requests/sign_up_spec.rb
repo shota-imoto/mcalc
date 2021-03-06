@@ -49,6 +49,5 @@ RSpec.describe "SingUp", :type => :request do
       let(:params) { { status: 'success', message: 'すでに本登録が完了しています' } }
       it_behaves_like :redirect_to_url_with_correct_params
     end
-    context 'トークンが渡されない'
   end
 end

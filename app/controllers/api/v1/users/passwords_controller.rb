@@ -38,7 +38,7 @@ class Api::V1::Users::PasswordsController < ApplicationController
           response = Response.new(status: 'error', message: user.errors.full_messages)
         end
       else
-        response = Response.new(status: 'error', message: '認証情報に誤りがあります')
+        response = Response.new(status: 'error', message: ['認証情報に誤りがあります'])
       end
       serializer = ResponseSerializer.new(response)
       render json: serializer.serializable_hash.to_json

@@ -3,7 +3,7 @@ class Api::V1::Users::SignInController < ApplicationController
 
   def create
     user = User.find_by(email: user_params[:email])
-
+    p user
     if user&.authenticate(user_params[:password])
       jwt_token = issue(user.id)
       response.headers['X-Authentication-Token'] = jwt_token

@@ -6,6 +6,8 @@ FactoryBot.define do
     password_confirmation {'1234azAZ'}
     confirmed_at { Time.zone.now }
     confirmation_sent_at { Time.zone.now }
+    reset_password_sent_at { Time.zone.now }
+    reset_password_token { 'token' }
 
     trait :before_confirm do
       confirmed_at { nil }
