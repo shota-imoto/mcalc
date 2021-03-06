@@ -8,6 +8,7 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード(確認用)
+        reset_password_token: 認証情報
       asset_config:
         initial_asset: 現在の資産
         monthly_purchase: 月々の積立額
@@ -24,6 +25,10 @@ ja:
               invalid: "%{attribute}ではない値が入力されています"
             password:
               invalid: "%{attribute}は数字、半角小文字、半角大文字を1文字ずつ以上含む必要があります"
+            reset_password_sent_at:
+              token_expiration: "パスワードの変更期限が過ぎています"
+            reset_password_token:
+              not_correspond: "%{attribute}に誤りがあります"
         retirement_asset_calc:
           attributes:
             tax_rate:
@@ -40,3 +45,4 @@ ja:
       greater_than: "%{attribute}は%{count}より大きい値にしてください"
       not_a_number: "%{attribute}は数字を入力してください"
       less_than_or_equal_to: "%{attribute}は%{count}以下の値にしてください"
+      token_expiration: "認証情報の期限が切れています"

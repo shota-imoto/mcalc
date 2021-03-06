@@ -1,46 +1,23 @@
-module UserConfirmationModule
+module UserResetPasswordModule
   extend ActiveSupport::Concern
 
   def confirm_reset_password_token(token)
-    return completed_params if confirmed_at.present?
-    return expired_params if check_expiration
-
-    if check_token(token)
-      # complete_confirmation
-      correspond_params
+    if check_reset_password_expiration
+      erros.add(:reset_password_sent_at, :token_expiration) && false
+    elsif check_reset_password_token(token)
+      true
     else
-      not_correspond_params
+      errors.add(:reset_password_token, :not_correspond) && false
     end
   end
 
   private
 
-  def check_expiration
-    self.reset_password_sent_at + 30.minutes < Time.zone.now
+  def check_reset_password_expiration
+    reset_password_sent_at + 30.minutes < Time.zone.now
   end
 
-  def check_token(token)
+  def check_reset_password_token(token)
     self.reset_password_token == token
-  end
-
-  def complete_confirmation
-    confirmed_at = Time.zone.now
-    save validate: false
-  end
-
-  def completed_params
-    { status: 'success', message: 'すでに本登録が完了しています' }
-  end
-
-  def expired_params
-    { status: 'error', message: '登録確認メールの期限が切れています' }
-  end
-
-  def correspond_params
-    { status: 'success', message: '本登録が完了しました。登録したメールアドレスとパスワードを入力してログインしてください' }
-  end
-
-  def not_correspond_params
-    { status: 'error', message: '登録確認トークンが一致しません' }
   end
 end

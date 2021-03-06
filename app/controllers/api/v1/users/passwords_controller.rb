@@ -30,7 +30,7 @@ class Api::V1::Users::PasswordsController < ApplicationController
   def update
     user = User.find(params[:user][:user_id])
     if user
-      if user.reset_password_token == params[:user][:reset_password_token]
+      if user.confirm_reset_password_token(params[:user][:reset_password_token])
         user.assign_attributes(reset_password_params)
         if user.save
           response = Response.new(status: 'success', message: 'password has changed')
@@ -38,7 +38,7 @@ class Api::V1::Users::PasswordsController < ApplicationController
           response = Response.new(status: 'error', message: user.errors.full_messages)
         end
       else
-        response = Response.new(status: 'error', message: ['認証情報に誤りがあります'])
+        response = Response.new(status: 'error', message: user.errors.full_messages)
       end
       serializer = ResponseSerializer.new(response)
       render json: serializer.serializable_hash.to_json
