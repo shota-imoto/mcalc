@@ -8,4 +8,13 @@ class UserMailer < ApplicationMailer
       to: @user.email
     )
   end
+
+  def reset_password(user)
+    @user = user
+    mail(
+      from: "hideyoshi.playing.the.banjo@gmail.com",
+      subject: "【F.I.R.E Countdown App】パスワード再登録メール",
+      to: @user.email
+    )
+  end
 end

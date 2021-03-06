@@ -11,6 +11,13 @@ Rails.application.routes.draw do
           end
         end
         resources :sign_in, only: :create
+        resource :password, only: [:edit, :update] do
+          collection do
+            patch :reset
+            get :confirm
+            patch :reissue
+          end
+        end
       end
     end
   end
