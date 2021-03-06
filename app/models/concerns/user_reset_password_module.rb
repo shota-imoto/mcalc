@@ -3,7 +3,7 @@ module UserResetPasswordModule
 
   def confirm_reset_password_token(token)
     if check_reset_password_expiration
-      erros.add(:reset_password_sent_at, :token_expiration) && false
+      errors.add(:reset_password_sent_at, :token_expiration) && false
     elsif check_reset_password_token(token)
       true
     else

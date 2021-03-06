@@ -33,12 +33,12 @@ class Api::V1::Users::PasswordsController < ApplicationController
       if user.confirm_reset_password_token(params[:user][:reset_password_token])
         user.assign_attributes(reset_password_params)
         if user.save
-          response = Response.new(status: 'success', message: 'password has changed')
+          response = Response.new(status: 'success', message: ['パスワードを再設定しました'])
         else
           response = Response.new(status: 'error', message: user.errors.full_messages)
         end
       else
-        response = Response.new(status: 'error', message: user.errors.full_messages)
+        response = Response.new(status: 'not authenticated', message: user.errors.full_messages)
       end
       serializer = ResponseSerializer.new(response)
       render json: serializer.serializable_hash.to_json
