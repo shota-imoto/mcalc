@@ -3,7 +3,6 @@ class Api::V1::Users::PasswordsController < ApplicationController
   include UrlHelper
 
   def reset
-    binding.pry
     user = User.find_by(email: params[:user][:email])
     if user
       user.assign_attributes(sign_up_params)
@@ -18,7 +17,7 @@ class Api::V1::Users::PasswordsController < ApplicationController
   end
 
   def edit
-    binding.pry
+    # binding.pry
     if params[:reset_password_token]
       user = User.find(params[:user_id])
       url = url_with_params('firecountdownapp://reset_password', reset_password_auth_params)
@@ -29,13 +28,31 @@ class Api::V1::Users::PasswordsController < ApplicationController
   end
 
   def update
-
+    user = User.find(params[:user][:user_id])
+    if user
+      if user.reset_password_token == params[:user][:reset_password_token]
+        user.assign_attributes(reset_password_params)
+        if user.save
+          response = Response.new(status: 'success', message: 'password has changed')
+        else
+          response = Response.new(status: 'error', message: user.errors.full_messages)
+        end
+      else
+        response = Response.new(status: 'error', message: '認証情報に誤りがあります')
+      end
+      serializer = ResponseSerializer.new(response)
+      render json: serializer.serializable_hash.to_json
+    end
   end
 
   private
 
   def sign_up_params
     params.require(:user).permit(:email).merge(confirmation_options)
+  end
+
+  def reset_password_params
+    params.require(:user).permit(:password, :password_confirmation)
   end
 
   def reset_password_auth_params
