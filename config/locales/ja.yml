@@ -7,6 +7,7 @@ ja:
         nickname: ニックネーム
         email: メールアドレス
         password: パスワード
+        confirmation_token: 登録確認トークン
         password_confirmation: パスワード(確認用)
         reset_password_token: 認証情報
       asset_config:
@@ -25,6 +26,12 @@ ja:
               invalid: "%{attribute}ではない値が入力されています"
             password:
               invalid: "%{attribute}は数字、半角小文字、半角大文字を1文字ずつ以上含む必要があります"
+            confirmed_at:
+              registration_complete: "すでに本登録が完了しています"
+            confirmation_sent_at:
+              token_expiration: "登録確認メールの期限が切れています"
+            confirmation_token:
+              uncorresponded_token: "%{attribute}が一致しません"
             reset_password_sent_at:
               token_expiration: "パスワードの変更期限が過ぎています"
             reset_password_token:

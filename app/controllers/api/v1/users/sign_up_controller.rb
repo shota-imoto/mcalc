@@ -18,8 +18,11 @@ class Api::V1::Users::SignUpController < ApplicationController
     token = params[:confirmation_token]
     if token
       user = User.find(params[:user_id])
-      result = user.confirm_token(token)
-      url = app_url_with_params(result)
+      if user.confirm_token(token)
+        url = app_url_with_params(status: 'success', message: '本登録が完了しました。登録したメールアドレスとパスワードを入力してログインしてください')
+      else
+        url = app_url_with_params(status: 'error', message: user.errors.full_messages)
+      end
       redirect_to url
     else
       render plain: "不正なアクセス"
