@@ -46,7 +46,7 @@ RSpec.describe "SingUp", :type => :request do
     end
     context 'すでに認証が完了している' do
       let(:user) { create(:user, :before_confirm, confirmed_at: Time.zone.now)}
-      let(:params) { { status: 'success', message: 'すでに本登録が完了しています' } }
+      let(:params) { { status: 'error', message: 'すでに本登録が完了しています' } }
       it_behaves_like :redirect_to_url_with_correct_params
     end
   end
