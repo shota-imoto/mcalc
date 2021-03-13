@@ -1,9 +1,6 @@
 module JwtAuthentication
   require 'jwt'
 
-  @@rsa_private = OpenSSL::PKey::RSA.generate(2048)
-  @@rsa_public = @@rsa_private.public_key
-
   def issue(user_id)
     rsa_private_str = Rails.application.credentials.jwt[:private].gsub("\\n", "\n")
     rsa_private = OpenSSL::PKey::RSA.new(rsa_private_str)
