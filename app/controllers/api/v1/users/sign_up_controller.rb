@@ -15,10 +15,9 @@ class Api::V1::Users::SignUpController < ApplicationController
   end
 
   def confirm
-    token = params[:confirmation_token]
-    if token
+    if params[:confirmation_token]
       user = User.find(params[:user_id])
-      if user.confirm_token(token)
+      if user.confirm_token(params[:confirmation_token])
         url = app_url_with_params(status: 'success', message: '本登録が完了しました。登録したメールアドレスとパスワードを入力してログインしてください')
       else
         url = app_url_with_params(status: 'error', message: user.errors.full_messages)

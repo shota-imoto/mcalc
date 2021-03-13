@@ -24,8 +24,10 @@ ja:
           attributes:
             email:
               invalid: "%{attribute}ではない値が入力されています"
+              no_record: "メールアドレスまたはパスワードが誤っています"
             password:
               invalid: "%{attribute}は数字、半角小文字、半角大文字を1文字ずつ以上含む必要があります"
+              wrong_password: "メールアドレスまたはパスワードが誤っています"
             confirmed_at:
               registration_complete: "すでに本登録が完了しています"
             confirmation_sent_at:
