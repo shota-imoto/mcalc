@@ -1,6 +1,6 @@
 class Api::V1::RetirementAssetConfigController < ApplicationController
   before_action :authenticate
-  before_action :set_retirement_asset_config
+  before_action :set_retirement_asset_config, only: :create
 
   def new
     retirement_asset_calc = RetirementAssetCalc.find_or_initialize_by(user_id: @user.id)
