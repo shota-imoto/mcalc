@@ -21,7 +21,7 @@ RSpec.describe "Config", :type => :request do
 
     context '異常系' do
       context 'バリデーションエラーが発生した場合' do
-        let(:asset_config_attributes) { asset_config.attributes.merge(initial_asset: nil) }
+        let(:asset_config_attributes) { asset_config.attributes.merge(monthly_living_cost: nil) }
         it 'エラーメッセージが返される' do
           expect(attributes["message"]).to eq ["現在の資産を入力してください", "現在の資産は数字を入力してください"]
         end
