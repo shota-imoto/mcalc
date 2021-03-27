@@ -6,7 +6,8 @@ class ApplicationController < ActionController::Base
     jwt_token = request.authorization&.remove("Token ", "")
     if jwt_token.present?
       payload = decode(jwt_token)
-      @user = User.find(payload[0]["sub"])
+      @user = User.find_or_initialize_by(uuid: payload[0]["sub"])
+      @user.save! if @user.new_record?
     end
   end
 end

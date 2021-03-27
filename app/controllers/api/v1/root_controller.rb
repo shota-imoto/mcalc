@@ -5,16 +5,8 @@ class Api::V1::RootController < ApplicationController
     if @user
       builder = RestTimeCalcBuilder.new(@user)
       @rest_time_calc = builder.rest_time_calc
-      serializer = RestTimeCalcSerializer.new(@rest_time_calc, serializer_options)
+      serializer = RestTimeCalcSerializer.new(@rest_time_calc)
       render json: serializer.serializable_hash.to_json
     end
-  end
-
-  private
-
-  def serializer_options
-    options = {}
-    options[:include] = [:'user.nickname']
-    options
   end
 end

@@ -12,7 +12,7 @@ class Api::V1::RetirementAssetConfigController < ApplicationController
     if @user.nil?
       config_response = Response.new(status: 'error', message: '不正なアクセス')
     elsif @retirement_asset_config.save
-      config_response = Response.new(status: 'success', message: "set configure as #{@user.nickname}", user_id: @user.id)
+      config_response = Response.new(status: 'success', message: "set configure", user_id: @user.id)
     else
       config_response = Response.new(status: 'error', message: @retirement_asset_config.errors.full_messages, user_id: @user.id)
     end
