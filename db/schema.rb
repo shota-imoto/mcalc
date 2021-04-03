@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "monthly_living_cost", default: "0"
     t.string "tax_rate", default: "80"
     t.string "annual_yield", default: "5"
+    t.string "four_percents_rule_ajustment", default: "4", null: false
     t.string "user_id"
   end
 

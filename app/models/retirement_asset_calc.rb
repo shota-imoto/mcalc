@@ -17,14 +17,10 @@ class RetirementAssetCalc < ApplicationRecord
   end
 
   def calculate
-    (annual_living_cost.to_r / yield_including_tax).to_f
+    (annual_living_cost.to_r / (four_percents_rule_ajustment.to_r * 0.01r)).to_f
   end
 
   def annual_living_cost
     monthly_living_cost.to_r * 12r
-  end
-
-  def yield_including_tax
-    annual_yield.to_r * 0.01r * tax_rate.to_r * 0.01r
   end
 end
