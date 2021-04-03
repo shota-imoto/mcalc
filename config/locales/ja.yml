@@ -16,8 +16,6 @@ ja:
         annual_yield: 期待年利
       retirement_asset_calc:
         monthly_living_cost: 月々の生活費
-        tax_rate: 税引き後レート
-        annual_yield: 期待年利
     errors:
       models:
         user:
@@ -38,11 +36,6 @@ ja:
               token_expiration: "パスワードの変更期限が過ぎています"
             reset_password_token:
               not_correspond: "%{attribute}に誤りがあります"
-        retirement_asset_calc:
-          attributes:
-            tax_rate:
-              greater_than: "%{attribute}は%{count}%より大きい値にしてください"
-              less_than_or_equal_to: "%{attribute}は%{count}%以下にしてください"
   errors:
     format: "%{message}"
     messages:

@@ -2,9 +2,8 @@
 
 class RetirementAssetCalc < ApplicationRecord
   belongs_to :user
-  validates :monthly_living_cost, :tax_rate, :annual_yield, presence: true
-  validates :monthly_living_cost, :annual_yield, numericality: { greater_than: 0 }
-  validates :tax_rate, numericality: { greater_than: 0, less_than_or_equal_to: 100 }
+  validates :monthly_living_cost, presence: true
+  validates :monthly_living_cost, numericality: { greater_than: 0 }
   validates :four_percents_rule_ajustment, numericality: { greater_than: 0, less_than_or_equal_to: 100 }
 
   def self.find_by_user_or_initialize(params)
