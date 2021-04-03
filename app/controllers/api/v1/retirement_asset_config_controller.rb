@@ -27,6 +27,6 @@ class Api::V1::RetirementAssetConfigController < ApplicationController
   end
 
   def retirement_asset_calc_params
-    params.require(:retirement_asset_calc).permit(:monthly_living_cost, :tax_rate, :annual_yield, :tfour_percents_rule_ajustment).merge(user: @user)
+    params.require(:retirement_asset_calc).permit(:monthly_living_cost, :tax_rate, :annual_yield, :four_percents_rule_ajustment).merge(user: @user)
   end
 end
