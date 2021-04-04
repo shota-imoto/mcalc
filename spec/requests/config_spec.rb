@@ -7,21 +7,23 @@ RSpec.describe "Config", :type => :request do
     include_context :authenticated_header_by_user
     let(:attributes) { JSON.parse(response.body).dig("data", "attributes") }
     let(:asset_config_attributes) { asset_config.attributes }
-
-    before { post api_v1_config_index_path, headers: headers, params: { asset_config: asset_config_attributes } }
-
+#JWTクラスに持っくはる
+    before do
+      Api::V1::ConfigController.new.instance_variable_set(:@user, user)
+      post api_v1_config_index_path, headers: headers, params: { asset_config: asset_config_attributes }
+    end
     context "正常系" do
       it "レスポンスオブジェクトはstatus, messagesの2項目を返す" do
         expect(attributes.keys).to eq ["status", "message"]
       end
       it '正常時のメッセージが返される' do
-        expect(attributes["message"]).to eq "set configure as #{user.nickname}"
+        expect(attributes["message"]).to eq "set configure"
       end
     end
 
     context '異常系' do
       context 'バリデーションエラーが発生した場合' do
-        let(:asset_config_attributes) { asset_config.attributes.merge(monthly_living_cost: nil) }
+        let(:asset_config_attributes) { asset_config.attributes.merge(initial_asset: nil) }
         it 'エラーメッセージが返される' do
           expect(attributes["message"]).to eq ["現在の資産を入力してください", "現在の資産は数字を入力してください"]
         end
