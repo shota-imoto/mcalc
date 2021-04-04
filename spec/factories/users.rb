@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :user do
-    uuid { 'uuid' }
+    uuid 'uuid'
   end
 end

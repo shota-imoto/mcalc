@@ -17,7 +17,7 @@ RSpec.describe "RetirementAssetConfig", :type => :request do
       end
 
       it '正常時のメッセージが返される' do
-        expect(attributes["message"]).to eq "set configure as #{user.nickname}"
+        expect(attributes["message"]).to eq "set configure"
       end
     end
 
