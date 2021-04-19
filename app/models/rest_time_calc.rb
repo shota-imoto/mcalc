@@ -16,11 +16,11 @@ class RestTimeCalc
 
   def calculate!
     loop.with_index do |_, i|
-      if asset_formation.asset_after_one_month > retirement_asset.retirement_asset
+      if asset_config.asset_after_one_month(asset_formation.asset_sum) > retirement_asset.retirement_asset
         self.asset_years, self.asset_months = to_years_and_months(i + 1)
         break
       end
-      asset_formation.asset_sum = asset_formation.asset_after_one_month
+      asset_formation.asset_sum = asset_config.asset_after_one_month(asset_formation.asset_sum)
     end
   end
 

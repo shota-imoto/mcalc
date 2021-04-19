@@ -11,6 +11,10 @@ class AssetConfig < ApplicationRecord
     @monthly_yield ||= monthly_yield_calc
   end
 
+  def asset_after_one_month(sum)
+    (sum.to_f + monthly_purchase.to_i) * monthly_yield.to_f
+  end
+
   def self.find_by_user_or_initialize(params)
     asset_config = find_or_initialize_by(user: params[:user])
     asset_config.assign_attributes(params)
