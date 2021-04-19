@@ -15,16 +15,9 @@ class AssetFormationCalc
   def asset_after_months(month_later)
     sum = asset_sum.to_f
     month_later.times do |i|
-      sum += asset_config.monthly_purchase.to_i # asset_after_one_monthを用いた場合、このメソッドを非破壊的に書くことができなくなるためDRY化していない
-      sum *= asset_config.monthly_yield.to_f
+      sum = asset_config.asset_after_one_month(sum)
     end
     sum
-  end
-
-  def asset_after_one_month
-    sum = asset_sum.to_f
-    sum += asset_config.monthly_purchase.to_i
-    sum *= asset_config.monthly_yield.to_f
   end
 end
 
