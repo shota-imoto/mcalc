@@ -6,6 +6,7 @@
 
 # Ignore bundler config.
 /.bundle
+/vendor/bundle/
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -26,3 +27,7 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 /config/keys/*
+
+# Ignore incorrectly generated gcp keys
+fca-key
+fca-key.pub
