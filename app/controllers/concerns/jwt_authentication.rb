@@ -5,7 +5,6 @@ module JwtAuthentication
 
   require 'jwt'
 
-  # TODO: リファクタリング
   def issue(user_id)
     rsa_private_str = Rails.application.credentials.jwt[:private].gsub("\\n", "\n")
     rsa_private = OpenSSL::PKey::RSA.new(rsa_private_str)
@@ -15,8 +14,6 @@ module JwtAuthentication
   end
 
   def decode(token)
-    pp 'トークン'
-    pp token 
     payload = JWT.decode(token, nil, false, {algorithm: 'RS256'})
     header = payload[1]
     uri = URI.parse('https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com')
