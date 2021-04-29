@@ -2,8 +2,8 @@ module JwtAuthentication
   require 'net/http'
   require 'uri'
   require "json"
-
   require 'jwt'
+
 
   # TODO: リファクタリング
   def issue(user_id)
@@ -14,17 +14,49 @@ module JwtAuthentication
     token = JWT.encode(payload, rsa_private, 'RS256')
   end
 
-  def decode(token)
-    pp 'トークン'
-    pp token 
-    payload = JWT.decode(token, nil, false, {algorithm: 'RS256'})
-    header = payload[1]
-    uri = URI.parse('https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com')
-    res = Net::HTTP.get(uri)
-    data = JSON.parse(res).map {|k, v| [k, v] }.to_h
-    public_key = data[header["kid"]]
-    certificate = OpenSSL::X509::Certificate.new(public_key)
-    JWT.decode(token, certificate.public_key, true, { algorithm: 'RS256', verify_iat: true })
+
+  class Decode
+    GOOGLE_TOKEN_URL = "https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com"
+
+    attr_reader :token
+
+    def initialize(token)
+      @token = token
+    end
+
+    def payload
+      JWT.decode(token, certification(public_key), true, { algorithm: 'RS256', verify_iat: true })
+    end
+
+    private
+
+    def public_key
+      google_key_set[key_id]
+    end
+
+    def certification(public_key)
+      OpenSSL::X509::Certificate.new(public_key).public_key
+    end
+
+    def key_id
+      no_verificated_payload(token)[1]["kid"]
+    end
+
+    def no_verificated_payload(token)
+      JWT.decode(token, nil, false, {algorithm: 'RS256'})
+    end
+
+    def google_key_set
+      JSON.parse(google_key_set_json).map {|k, v| [k, v] }.to_h
+    end
+
+    def google_key_set_json
+      Net::HTTP.get google_token_url
+    end
+
+    def google_token_url
+      URI.parse(GOOGLE_TOKEN_URL)
+    end
   end
 end
 

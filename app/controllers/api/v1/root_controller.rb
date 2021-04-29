@@ -3,10 +3,11 @@ class Api::V1::RootController < ApplicationController
 
   def index
     if @user
-      builder = RestTimeCalcBuilder.new(@user)
-      @rest_time_calc = builder.rest_time_calc
+      @rest_time_calc = RestTimeCalcBuilder.new(@user).rest_time_calc
       serializer = RestTimeCalcSerializer.new(@rest_time_calc)
-      render json: serializer.serializable_hash.to_json
+    else
+      config_response = Response.new(status: 'error', message: '不正なアクセス')
     end
+    render json: serializer.serializable_hash.to_json
   end
 end

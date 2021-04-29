@@ -25,7 +25,7 @@ RSpec.describe "RetirementAssetConfig", :type => :request do
       context 'バリデーションエラーが発生した場合' do
         let(:retirement_asset_config_attributes) { retirement_asset_calc.attributes.merge(monthly_living_cost: nil) }
         it 'エラーメッセージが返される' do
-          expect(attributes["message"]).to eq ["月々の生活費を入力してください", "月々の生活費は数字を入力してください"]
+          expect(attributes["message"]).to eq ["Monthly living cost can't be blank", "Monthly living cost is not a number"]
         end
       end
 
