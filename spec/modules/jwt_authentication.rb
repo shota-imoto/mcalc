@@ -12,7 +12,5 @@ RSpec.describe JwtAuthentication do
         is_expected.to eq user.id
       end
     end
-
   end
-
 end

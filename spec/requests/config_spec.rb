@@ -7,7 +7,7 @@ RSpec.describe "Config", :type => :request do
     include_context :authenticated_header_by_user
     let(:attributes) { JSON.parse(response.body).dig("data", "attributes") }
     let(:asset_config_attributes) { asset_config.attributes }
-#JWTクラスに持っくはる
+#JWTクラスに持っくる
     before do
       Api::V1::ConfigController.new.instance_variable_set(:@user, user)
       post api_v1_config_index_path, headers: headers, params: { asset_config: asset_config_attributes }
@@ -25,7 +25,7 @@ RSpec.describe "Config", :type => :request do
       context 'バリデーションエラーが発生した場合' do
         let(:asset_config_attributes) { asset_config.attributes.merge(initial_asset: nil) }
         it 'エラーメッセージが返される' do
-          expect(attributes["message"]).to eq ["現在の資産を入力してください", "現在の資産は数字を入力してください"]
+          expect(attributes["message"]).to eq ["Initial asset can't be blank", "Initial asset is not a number"]
         end
       end
 
