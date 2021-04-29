@@ -15,6 +15,6 @@ class ApplicationController < ActionController::Base
   end
 
   def switch_locale(&block)
-    I18n.with_locale Locale::Check.new(params[:locale]).get_supported_locale, &block
+    I18n.with_locale Locale::Check.new(params[:locale]).supported_locale, &block
   end
 end
