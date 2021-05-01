@@ -1,0 +1,3 @@
+class AssetRecord < ApplicationRecord
+	
+end

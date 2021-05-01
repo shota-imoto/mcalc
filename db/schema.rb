@@ -19,6 +19,14 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "user_id"
   end
 
+  create_table "asset_records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "amount"
+    t.datetime "date"
+    t.string "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "retirement_asset_calcs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "monthly_living_cost", default: "0"
     t.string "four_percents_rule_ajustment", default: "4", null: false
@@ -29,11 +37,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "uuid", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "yield_configs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "annual_yield", default: "5"
-    t.string "user_id"
   end
 
 end
