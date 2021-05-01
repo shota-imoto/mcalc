@@ -25,7 +25,7 @@ module JwtAuthentication
     end
 
     def payload
-      JWT.decode(token, certification(public_key), true, { algorithm: 'RS256', verify_iat: true })
+      JWT.decode(token, certification(public_key), true, { algorithm: 'RS256', verify_iat: false })
     end
 
     private
