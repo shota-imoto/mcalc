@@ -2,6 +2,14 @@ require 'rails_helper'
 
 shared_context :authenticated_header_by_user do
   # before_include_this_context, you have to define user factory.
+  before do
+    begin
+      user
+    rescue NameError => e
+      raise e, 'before_include_this_context, you have to define user factory.'
+    end
+  end
+
   include JwtAuthentication
 
   let(:headers) { { Authorization: "Token example" } }
