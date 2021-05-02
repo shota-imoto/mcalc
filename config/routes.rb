@@ -4,7 +4,7 @@ Rails.application.routes.draw do
       root 'root#index'
       resources :config, only: [:new, :create]
       resources :retirement_asset_config, only: [:new, :create]
-      resources :asset_record, only: [:new, :create]
+      resources :asset_record, only: [:create]
       namespace :users do
         resources :sign_up, only: :create do
           collection do
