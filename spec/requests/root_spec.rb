@@ -44,5 +44,4 @@ RSpec.describe "Root", :type => :request do
       end
     end
   end
-
 end
