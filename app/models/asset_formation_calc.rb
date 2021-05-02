@@ -1,8 +1,8 @@
 class AssetFormationCalc
   attr_accessor :asset_sum, :asset_config
 
-  def initialize(asset_config)
-    @asset_sum ||= asset_config&.initial_asset
+  def initialize(asset_config, asset_record)
+    @asset_sum ||= asset_record.amount
     @asset_config = asset_config
   end
 

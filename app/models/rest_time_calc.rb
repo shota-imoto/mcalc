@@ -1,17 +1,17 @@
 class RestTimeCalc
   include ActiveModel::Validations
 
-  attr_accessor :asset_config, :retirement_asset, :user_id, :asset_years, :asset_months
+  attr_accessor :asset_config, :retirement_asset, :asset_record, :user_id, :asset_years, :asset_months
   validates :asset_config, :retirement_asset, presence: true
 
-  def initialize(retirement_asset_calc = nil, user_id = nil, asset_config = nil)
-    @user_id, @asset_config, @retirement_asset = user_id, asset_config, retirement_asset_calc
+  def initialize(retirement_asset_calc = nil, user_id = nil, asset_config = nil, asset_record = nil)
+    @user_id, @asset_config, @retirement_asset, @asset_record = user_id, asset_config, retirement_asset_calc, asset_record
     @asset_years, @asset_months = 0, 0
     calculate! if valid?
   end
 
   def asset_formation
-    @asset_formation ||= asset_formation_calc = AssetFormationCalc.new(asset_config)
+    @asset_formation ||= AssetFormationCalc.new(asset_config, asset_record)
   end
 
   def calculate!
