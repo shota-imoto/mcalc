@@ -25,17 +25,17 @@ module JwtAuthentication
     end
 
     def payload
-      JWT.decode(token, certification(public_key), true, { algorithm: 'RS256', verify_iat: false })
+      JWT.decode(token, certification, true, { algorithm: 'RS256', verify_iat: false })
     end
 
     private
 
-    def public_key
-      google_key_set[key_id]
+    def certification
+      OpenSSL::X509::Certificate.new(public_key).public_key
     end
 
-    def certification(public_key)
-      OpenSSL::X509::Certificate.new(public_key).public_key
+    def public_key
+      google_key_set[key_id]
     end
 
     def key_id
