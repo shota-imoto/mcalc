@@ -15,13 +15,30 @@ class RestTimeCalc
   end
 
   def calculate!
-    loop.with_index do |_, i|
-      if asset_config.asset_after_one_month(asset_formation.asset_sum) > retirement_asset.retirement_asset
-        self.asset_years, self.asset_months = to_years_and_months(i + 1)
-        break
-      end
-      asset_formation.asset_sum = asset_config.asset_after_one_month(asset_formation.asset_sum)
-    end
+    self.asset_years, self.asset_months = to_years_and_months(rest_months_from_last_record)
+  end
+
+  def rest_months_from_last_record
+    RestMonthCalc.new(retirement_asset, asset_config, asset_record).asset_months
+  end
+
+  def rest_days(rest_months)
+    rest_months * 30 - passed_days
+  end
+
+  def passed_days
+    passed_unix_time / 60 / 60 / 24
+  end
+
+  def passed_unix_time
+    (Time.zone.now - asset_record.date).to_i 
+  end
+
+  # 登録日+残月数-現在
+  # 残月数-(現在-登録日)
+
+  def to_ymd(days)
+    [days / 30 / 12, days / 30 % 12, days % 30]
   end
 
   def to_years_and_months(months)
