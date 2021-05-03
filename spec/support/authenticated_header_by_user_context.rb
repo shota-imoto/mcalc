@@ -17,6 +17,7 @@ shared_context :authenticated_header_by_user do
     certificate = double('certificate double')
     allow(certificate).to receive(:public_key).and_return('publick key mock')
     allow(OpenSSL::X509::Certificate).to receive(:new).and_return(certificate)
+    allow(Net::HTTP).to receive(:get).and_return('{}')
     allow(JWT).to receive(:decode).and_return([{"sub" => user.uuid}, {}])
   end
 end

@@ -16,8 +16,8 @@ RSpec.describe "Root", :type => :request do
         expect(JSON.parse(response.body).dig("data", "type")).to eq "rest_time_calc"
       end
 
-      it "RestTimeCalcオブジェクトはasset_years, asset_months, messagesの3項目を返す" do
-        expect(attributes.keys).to eq ["asset_years", "asset_months", "messages"]
+      it "RestTimeCalcオブジェクトはrest_years, rest_months, messagesの3項目を返す" do
+        expect(attributes.keys).to eq ["rest_years", "rest_months", "messages"]
       end
 
       it 'レスポンスにエラーメッセージが含まれていない' do

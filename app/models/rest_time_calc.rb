@@ -1,29 +1,36 @@
 class RestTimeCalc
   include ActiveModel::Validations
 
-  attr_accessor :asset_config, :retirement_asset, :asset_record, :user_id, :asset_years, :asset_months
+  attr_reader :asset_config, :retirement_asset, :asset_record, :user_id
   validates :asset_config, :retirement_asset, presence: true
 
   def initialize(retirement_asset_calc = nil, user_id = nil, asset_config = nil, asset_record = nil)
     @user_id, @asset_config, @retirement_asset, @asset_record = user_id, asset_config, retirement_asset_calc, asset_record
-    @asset_years, @asset_months = 0, 0
-    calculate! if valid?
   end
 
-  def asset_formation
-    @asset_formation ||= AssetFormationCalc.new(asset_config, asset_record)
+  def rest_years
+    rest_ymd[0]
   end
 
-  def calculate!
-    self.asset_years, self.asset_months = to_years_and_months(rest_months_from_last_record)
+  def rest_months
+    rest_ymd[1]
   end
 
+  def rest_days
+    rest_ymd[2]
+  end
+  
+  def rest_ymd
+    return Array.new(3) { nil } if invalid?
+    [rest_period_days / 30 / 12, rest_period_days / 30 % 12, rest_period_days % 30]
+  end
+
+  def rest_period_days
+    rest_months_from_last_record * 30 - passed_days
+  end
+  
   def rest_months_from_last_record
-    RestMonthCalc.new(retirement_asset, asset_config, asset_record).asset_months
-  end
-
-  def rest_days(rest_months)
-    rest_months * 30 - passed_days
+    @rest_months ||= RestMonthCalc.new(retirement_asset, asset_config, asset_record).rest_months
   end
 
   def passed_days
@@ -31,18 +38,11 @@ class RestTimeCalc
   end
 
   def passed_unix_time
-    (Time.zone.now - asset_record.date).to_i 
+    (now - asset_record.date).to_i 
   end
 
-  # 登録日+残月数-現在
-  # 残月数-(現在-登録日)
-
-  def to_ymd(days)
-    [days / 30 / 12, days / 30 % 12, days % 30]
-  end
-
-  def to_years_and_months(months)
-    [months / 12, months % 12]
+  def now
+    @now ||= Time.zone.now
   end
 
   def user

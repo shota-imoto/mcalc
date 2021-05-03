@@ -5,8 +5,8 @@ RSpec.describe RestTimeCalc, type: :model do
   include_context :user_with_rest_time_calc_config
 
   describe 'calculate' do
-    let(:result_years) { rest_time_calc.asset_years }
-    let(:relust_month) { rest_time_calc.asset_months }
+    let(:result_years) { rest_time_calc.rest_years }
+    let(:relust_month) { rest_time_calc.rest_months }
     let(:check_calc) { AssetFormationCalc.new(asset_config, asset_record) }
 
     context '計算結果の年数と月数が経過したときの総資産額を検算した場合' do
