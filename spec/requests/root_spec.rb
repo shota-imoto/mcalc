@@ -17,7 +17,7 @@ RSpec.describe "Root", :type => :request do
       end
 
       it "RestTimeCalcオブジェクトはrest_years, rest_months, messagesの3項目を返す" do
-        expect(attributes.keys).to eq ["rest_years", "rest_months", "messages"]
+        expect(attributes.keys).to eq ["rest_years", "rest_months", "rest_days", "messages"]
       end
 
       it 'レスポンスにエラーメッセージが含まれていない' do
