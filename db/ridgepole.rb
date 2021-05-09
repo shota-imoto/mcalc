@@ -5,8 +5,8 @@ create_table "asset_configs", force: :cascade do |t|
 end
 
 create_table "retirement_asset_calcs", force: :cascade do |t|
-  t.string "monthly_living_cost", null: :false, default: 0
-  t.string "four_percents_rule_ajustment", null: false, default: 4
+  t.string "monthly_living_budget", null: :false, default: 0
+  t.string "ajust_4per_rule", null: false, default: 4
   t.string "user_id", null: :false
 end
 

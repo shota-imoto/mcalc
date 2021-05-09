@@ -30,4 +30,14 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    models:
+      user: user
+      asset_config: Main config
+      retirement_asset_calc: Retirement asset config
+    attributes:
+      asset_config:
+        monthly_purchase: Purchase price per month
+        annual_yield: Expected yield per year
+      asset_record:
+        amount: Asset amount
