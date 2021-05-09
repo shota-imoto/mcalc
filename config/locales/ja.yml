@@ -2,19 +2,18 @@ ja:
   activerecord:
     models:
       user: ユーザー
+      asset_config: メイン設定
+      retirement_asset_calc: リタイア額の計算
+      asset_record: 資産推移
     attributes:
-      user:
-        nickname: ニックネーム
-        email: メールアドレス
-        password: パスワード
-        confirmation_token: 登録確認トークン
-        password_confirmation: パスワード(確認用)
-        reset_password_token: 認証情報
       asset_config:
         monthly_purchase: 月々の積立額
         annual_yield: 期待年利
       retirement_asset_calc:
-        monthly_living_cost: 月々の生活費
+        monthly_living_budget: 月々の生活費
+      asset_record:
+        amount: 資産額
+        date: 年月
     errors:
       models:
         user:

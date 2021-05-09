@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table "retirement_asset_calcs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "monthly_living_cost", default: "0"
-    t.string "four_percents_rule_ajustment", default: "4", null: false
+    t.string "monthly_living_budget", default: "0"
+    t.string "ajust_4per_rule", default: "4", null: false
     t.string "user_id"
   end
 

@@ -25,7 +25,7 @@ RSpec.describe "AssetRecord", :type => :request do
       context 'バリデーションエラーが発生した場合' do
         let(:asset_record_attributes) { attributes_for(:asset_record).merge(amount: nil) }
         it 'エラーメッセージが返される' do
-          expect(attributes["message"]).to eq ["Amount can't be blank", "Amount is not a number"]
+          expect(attributes["message"]).to eq ["Asset amount can't be blank", "Asset amount is not a number"]
         end
       end
 
