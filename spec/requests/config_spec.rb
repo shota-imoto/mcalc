@@ -23,9 +23,9 @@ RSpec.describe "Config", :type => :request do
 
     context '異常系' do
       context 'バリデーションエラーが発生した場合' do
-        let(:asset_config_attributes) { asset_config.attributes.merge(initial_asset: nil) }
+        let(:asset_config_attributes) { asset_config.attributes.merge(monthly_purchase: nil) }
         it 'エラーメッセージが返される' do
-          expect(attributes["message"]).to eq ["Initial asset can't be blank", "Initial asset is not a number"]
+          expect(attributes["message"]).to eq ["Monthly purchase can't be blank", "Monthly purchase is not a number"]
         end
       end
 

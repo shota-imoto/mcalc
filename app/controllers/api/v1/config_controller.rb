@@ -33,6 +33,6 @@ class Api::V1::ConfigController < ApplicationController
   end
 
   def asset_config_params
-    params.require(:asset_config).permit(:initial_asset, :monthly_purchase, :annual_yield).merge(user: @user)
+    params.require(:asset_config).permit(:monthly_purchase, :annual_yield).merge(user: @user)
   end
 end

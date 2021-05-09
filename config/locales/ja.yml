@@ -11,7 +11,6 @@ ja:
         password_confirmation: パスワード(確認用)
         reset_password_token: 認証情報
       asset_config:
-        initial_asset: 現在の資産
         monthly_purchase: 月々の積立額
         annual_yield: 期待年利
       retirement_asset_calc:
