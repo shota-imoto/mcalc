@@ -8,41 +8,16 @@ class RestTimeCalc
     @user_id, @asset_config, @retirement_asset, @asset_record = user_id, asset_config, retirement_asset_calc, asset_record
   end
 
-  def rest_years
-    rest_ymd[0]
-  end
-
-  def rest_months
-    rest_ymd[1]
+  def retire_day
+    asset_record.date + rest_months_from_last_record.months
   end
 
   def rest_days
-    rest_ymd[2]
-  end
-  
-  def rest_ymd
-    return Array.new(3) { nil } if invalid?
-    [rest_period_days / 30 / 12, rest_period_days / 30 % 12, rest_period_days % 30]
+    (retire_day - Time.zone.today).to_i
   end
 
-  def rest_period_days
-    rest_months_from_last_record * 30 - passed_days
-  end
-  
   def rest_months_from_last_record
     @rest_months ||= RestMonthCalc.new(retirement_asset, asset_config, asset_record).rest_months
-  end
-
-  def passed_days
-    passed_unix_time / 60 / 60 / 24
-  end
-
-  def passed_unix_time
-    (now - asset_record.date).to_i 
-  end
-
-  def now
-    @now ||= Time.zone.now
   end
 
   def user

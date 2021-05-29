@@ -11,7 +11,7 @@ class Api::V1::AssetRecordController < ApplicationController
   private
 
   def set_asset_record
-    @asset_record = AssetRecord.find_or_initialize_by(user: @user, date: date_params)
+    @asset_record = AssetRecord.find_by_month_or_initialize_by(user: @user, date: date_params)
   end
 
   def create_response

@@ -20,4 +20,3 @@ class AssetFormationCalc
     sum
   end
 end
-

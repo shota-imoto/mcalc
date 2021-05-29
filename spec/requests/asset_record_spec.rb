@@ -7,11 +7,12 @@ RSpec.describe "AssetRecord", :type => :request do
     let(:user) { create(:user) }
     let(:attributes) { JSON.parse(response.body).dig("data", "attributes") }
     let(:asset_record_attributes) { attributes_for(:asset_record) }
-#JWTクラスに持っくる
+
     before do
       Api::V1::AssetRecordController.new.instance_variable_set(:@user, user)
       post api_v1_asset_record_index_path, headers: headers, params: { asset_record: asset_record_attributes }
     end
+
     context "正常系" do
       it "レスポンスオブジェクトはstatus, messagesの2項目を返す" do
         expect(attributes.keys).to eq ["status", "message"]

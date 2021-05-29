@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 0) do
 
   create_table "asset_records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "amount"
-    t.datetime "date"
+    t.date "date"
     t.string "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

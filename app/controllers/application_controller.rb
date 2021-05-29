@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
   include Locale
 
   def authenticate
-    pp jwt_token
     if jwt_token.present?
       @user = User.find_or_initialize_by(uuid: payload[0]["sub"])
       @user.save! if @user.new_record?
