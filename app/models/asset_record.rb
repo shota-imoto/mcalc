@@ -6,7 +6,9 @@ class AssetRecord < ApplicationRecord
 
 	scope :latest_users_asset, -> (user) { where(user_id: user.id).order(:date).last }
 
-	def date=(value)
-		super AssetRecordDate.new(value).date
+	def self.find_by_month_or_initialize_by(arg)
+		date_range = arg[:date].to_date.beginning_of_month..arg[:date].to_date.end_of_month
+		record = find_by(arg.merge(date: date_range))
+		record || new(arg)
 	end
 end

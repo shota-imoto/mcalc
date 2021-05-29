@@ -12,7 +12,7 @@ end
 
 create_table "asset_records", force: :cascade do |t|
   t.string "amount", null: :false
-  t.datetime "date", null: :false
+  t.date "date", null: :false
   t.string "user_id", null: :false
   t.timestamps
 end

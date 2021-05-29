@@ -4,28 +4,19 @@ RSpec.describe RestTimeCalc, type: :model do
   let(:rest_time_calc) { RestTimeCalc.new(retirement_asset_calc, user.id, asset_config, asset_record) }
   include_context :user_with_rest_time_calc_config
 
-  describe 'calculate' do
-    let(:result_years) { rest_time_calc.rest_years }
-    let(:result_month) { rest_time_calc.rest_months }
-    let(:result_days) { rest_time_calc.rest_days }
-    let(:passed_days) { (rest_time_calc.now - asset_record.date) / 60 / 60 / 24 }
-    let(:rest_months_from_last_record) { result_years * 12 + result_month + (result_days + passed_days.to_i) / 30 }
-    let(:check_calc) { AssetFormationCalc.new(asset_config, asset_record) }
+  describe 'retire_day' do
+    subject { rest_time_calc.retire_day }
 
-    context '計算結果の年数と月数が経過したときの総資産額を検算した場合' do
-      subject { check_calc.asset_after_months(rest_months_from_last_record) }
-
-      it '引退目標の資産額を上回っている' do
-        is_expected.to be >= retirement_asset_calc.retirement_asset
-      end
+    context '正常系' do
+      it { expect { subject }.to_not raise_error }
     end
+  end
 
-    context '計算結果の年数と月数の1月前の総資産額を検算した場合' do
-      subject { check_calc.asset_after_months(rest_months_from_last_record - 1) }
+  describe 'rest_days' do
+    subject { rest_time_calc.rest_days }
 
-      it '引退目標の資産額を下回っている' do
-        is_expected.to be <= retirement_asset_calc.retirement_asset
-      end
+    context '正常系' do
+      it { expect { subject }.to_not raise_error }
     end
   end
 
